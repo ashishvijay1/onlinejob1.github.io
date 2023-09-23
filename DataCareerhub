@@ -1,0 +1,27 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Collect form data
+    $name = $_POST["name"];
+    $email = $_POST["email"];
+    $message = $_POST["message"];
+
+    // Define the CSV file path
+    $csvFile = 'user_data.csv';
+
+    // Open the CSV file in append mode
+    $file = fopen($csvFile, 'a');
+
+    // Create an array with the form data
+    $data = [$name, $email, $message];
+
+    // Write the data to the CSV file (comma-separated)
+    fputcsv($file, $data);
+
+    // Close the CSV file
+    fclose($file);
+
+    // Redirect to a thank you page or display a success message
+    header("Location: thank_you.html");
+    exit();
+}
+?>
